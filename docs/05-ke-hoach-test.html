@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>05 · Kế hoạch test — Hứng Quà FPT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&family=JetBrains+Mono&display=swap">
+  <link rel="stylesheet" href="../design/tokens.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a class="brand" href="index.html">Hứng Quà FPT<small>Tài liệu thiết kế game</small></a>
+    <ul class="nav">
+      <li><a href="index.html">Mục lục</a></li>
+      <li><a href="01-tong-quan.html">01 · Tổng quan</a></li>
+      <li><a href="02-chuc-nang.html">02 · Chức năng</a></li>
+      <li><a href="03-man-hinh.html">03 · Màn hình</a></li>
+      <li><a href="04-quy-tac-du-lieu.html">04 · Quy tắc &amp; dữ liệu</a></li>
+      <li><a href="05-ke-hoach-test.html" aria-current="page">05 · Kế hoạch test</a></li>
+    </ul>
+  </aside>
+  <main>
+    <p class="eyebrow">Tài liệu 05</p>
+    <h1>Kế hoạch test</h1>
+    <p class="lead">Cách kiểm tra game trước khi phát hành: test tự động cho phần luật chơi và dữ liệu, test tay trên thiết bị thật cho cảm giác điều khiển và hiệu năng.</p>
+
+    <h2>1. Chiến lược</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Loại test</th><th>Phạm vi</th><th>Cách làm</th></tr></thead>
+        <tbody>
+          <tr><td>Unit test</td><td>Tính điểm, combo, mạng, công thức độ khó, chọn vật theo tỉ trọng, luật công bằng, đọc/ghi dữ liệu</td><td>Tự động. Logic tách khỏi phần vẽ để test được mà không cần trình duyệt; dùng bộ sinh số ngẫu nhiên có seed cố định.</td></tr>
+          <tr><td>Test tích hợp / E2E</td><td>Luồng màn hình, tạm dừng, kết thúc ván, lưu điểm cao</td><td>Tự động trên trình duyệt thật (ví dụ Playwright), có chế độ test cho phép đặt seed và tua nhanh thời gian.</td></tr>
+          <tr><td>Test tay trên thiết bị</td><td>Cảm giác điều khiển, hiển thị, âm thanh, rung</td><td>Theo danh sách thiết bị ở mục 2.</td></tr>
+          <tr><td>Test hiệu năng</td><td>Khung hình/giây, thời gian tải, bộ nhớ</td><td>Đo bằng công cụ của trình duyệt ở cấp 15, chơi liên tục 10 phút.</td></tr>
+          <tr><td>Chơi thử (playtest)</td><td>Độ khó, độ vui, độ dễ hiểu</td><td>5–8 người chưa biết game, mỗi người 3 ván, ghi lại điểm và nhận xét.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>2. Thiết bị &amp; trình duyệt</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Nhóm</th><th>Thiết bị</th><th>Trình duyệt</th><th>Ưu tiên</th></tr></thead>
+        <tbody>
+          <tr><td>Android tầm trung</td><td>Máy 2–3 năm tuổi, RAM 4 GB, màn 360–412 px</td><td>Chrome, Cốc Cốc</td><td><span class="tag must">Bắt buộc</span></td></tr>
+          <tr><td>iPhone</td><td>iPhone 11 hoặc mới hơn</td><td>Safari</td><td><span class="tag must">Bắt buộc</span></td></tr>
+          <tr><td>PC Windows</td><td>Laptop màn 1366 × 768 và 1920 × 1080</td><td>Chrome, Edge, Cốc Cốc</td><td><span class="tag must">Bắt buộc</span></td></tr>
+          <tr><td>Mac</td><td>MacBook</td><td>Safari, Chrome</td><td><span class="tag should">Nên có</span></td></tr>
+          <tr><td>Máy tính bảng</td><td>iPad / tablet Android, cả dọc và ngang</td><td>Safari, Chrome</td><td><span class="tag should">Nên có</span></td></tr>
+          <tr><td>Firefox</td><td>PC</td><td>Firefox</td><td><span class="tag could">Có thể</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>3. Ca kiểm thử</h2>
+
+    <h3>Điều khiển</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Mã</th><th>Tình huống</th><th>Kết quả mong đợi</th><th>Liên quan</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">TC-01</td><td>Giữ phím → đến hết mép phải</td><td>Giỏ dừng sát mép, không đi ra ngoài.</td><td>CN-01</td></tr>
+          <tr><td class="mono">TC-02</td><td>Nhấn rồi thả nhanh phím ←</td><td>Giỏ dịch một đoạn nhỏ, chỉnh vị trí được chính xác.</td><td>CN-01</td></tr>
+          <tr><td class="mono">TC-03</td><td>Kéo ngón tay từ mép trái sang mép phải thật nhanh</td><td>Giỏ đuổi theo với tốc độ tối đa 1,3W/s, không dịch chuyển tức thời.</td><td>CN-01</td></tr>
+          <tr><td class="mono">TC-04</td><td>Kéo tay trong lúc chơi trên điện thoại</td><td>Trang không cuộn, không phóng to, không hiện menu nhấn giữ.</td><td>CN-01</td></tr>
+          <tr><td class="mono">TC-05</td><td>Xoay màn hình / đổi kích thước cửa sổ giữa ván</td><td>Game tự tạm dừng, khung chơi vẽ lại đúng tỉ lệ, vật giữ đúng vị trí tương đối.</td><td>CN-01, PCN-04</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Luật chơi &amp; tính điểm</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Mã</th><th>Tình huống</th><th>Kết quả mong đợi</th><th>Liên quan</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">TC-10</td><td>Hứng Modem Wi-Fi, combo 0</td><td>+10 điểm, combo = 1.</td><td>CN-03</td></tr>
+          <tr><td class="mono">TC-11</td><td>Đang combo 4, hứng FPT Camera</td><td>Combo = 5, +22 điểm (15 × 1,5 làm tròn xuống).</td><td>CN-10</td></tr>
+          <tr><td class="mono">TC-12</td><td>Combo 12, đang Nhân đôi, hứng Combo Internet + TH</td><td>+200 điểm (50 × 2 × 2).</td><td>CN-10, CN-11</td></tr>
+          <tr><td class="mono">TC-13</td><td>Hứng vật xấu</td><td>−1 mạng, combo = 0, màn hình nháy đỏ.</td><td>CN-04</td></tr>
+          <tr><td class="mono">TC-14</td><td>Để lọt vật tốt</td><td>−1 mạng, combo = 0.</td><td>CN-04</td></tr>
+          <tr><td class="mono">TC-15</td><td>Để lọt vật xấu hoặc vật hỗ trợ</td><td>Không mất mạng, combo giữ nguyên.</td><td>CN-04</td></tr>
+          <tr><td class="mono">TC-16</td><td>Có Khiên, hứng vật xấu</td><td>Không mất mạng, Khiên biến mất, combo giữ nguyên.</td><td>CN-11</td></tr>
+          <tr><td class="mono">TC-17</td><td>Hai vật xấu chạm giỏ cách nhau 0,3 giây</td><td>Chỉ mất 1 mạng nhờ 1 giây miễn nhiễm.</td><td>CN-04</td></tr>
+          <tr><td class="mono">TC-18</td><td>Đang 5 mạng</td><td>Không xuất hiện vật Thêm mạng.</td><td>CN-11</td></tr>
+          <tr><td class="mono">TC-19</td><td>Vật chạm cạnh bên giỏ, không chạm miệng giỏ</td><td>Không tính là hứng; vật rơi tiếp.</td><td>CN-03</td></tr>
+          <tr><td class="mono">TC-20</td><td>Mất mạng cuối cùng</td><td>Vật ngừng sinh, sau 1 giây chuyển sang màn hình Kết thúc.</td><td>CN-08</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Độ khó &amp; sinh vật</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Mã</th><th>Tình huống</th><th>Kết quả mong đợi</th><th>Liên quan</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">TC-30</td><td>Chơi 20 giây (không tạm dừng)</td><td>Lên cấp 2, hiện thông báo "Cấp 2!".</td><td>CN-05</td></tr>
+          <tr><td class="mono">TC-31</td><td>Chơi 10 giây, tạm dừng 30 giây, chơi tiếp 5 giây</td><td>Vẫn ở cấp 1.</td><td>CN-05, CN-07</td></tr>
+          <tr><td class="mono">TC-32</td><td>Tua nhanh tới phút thứ 6</td><td>Dừng ở cấp 15; tốc độ và mật độ không tăng thêm.</td><td>CN-05</td></tr>
+          <tr><td class="mono">TC-33</td><td>Sinh 10.000 vật ở cấp 1 với seed cố định</td><td>Tỉ lệ từng loại lệch không quá ±2% so với tỉ trọng.</td><td>CN-02</td></tr>
+          <tr><td class="mono">TC-34</td><td>Sinh 10.000 vật ở cấp 15</td><td>Tỉ lệ vật xấu ≤ 35%; không vật tốt nào vi phạm luật công bằng.</td><td>CN-02</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Màn hình &amp; luồng</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Mã</th><th>Tình huống</th><th>Kết quả mong đợi</th><th>Liên quan</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">TC-40</td><td>Mở game lần đầu, bấm Chơi</td><td>Hiện màn hình Hướng dẫn trước khi vào ván.</td><td>CN-12</td></tr>
+          <tr><td class="mono">TC-41</td><td>Mở game lần hai, bấm Chơi</td><td>Vào ván ngay, có đếm ngược 3–2–1.</td><td>CN-12</td></tr>
+          <tr><td class="mono">TC-42</td><td>Chuyển tab khác giữa ván rồi quay lại</td><td>Game đang ở trạng thái Tạm dừng; vật không di chuyển trong lúc vắng mặt.</td><td>CN-07</td></tr>
+          <tr><td class="mono">TC-43</td><td>Bấm Tiếp tục ở màn hình Tạm dừng</td><td>Đếm ngược 3 giây rồi chơi tiếp đúng trạng thái cũ.</td><td>CN-07</td></tr>
+          <tr><td class="mono">TC-44</td><td>Bấm Về menu giữa ván</td><td>Hỏi xác nhận; đồng ý thì về menu và không lưu điểm ván đó.</td><td>CN-07</td></tr>
+          <tr><td class="mono">TC-45</td><td>Đang kéo giỏ đúng lúc hết mạng</td><td>Không vô tình bấm Chơi lại (nút khoá 0,8 giây đầu).</td><td>CN-08</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Dữ liệu</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Mã</th><th>Tình huống</th><th>Kết quả mong đợi</th><th>Liên quan</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">TC-50</td><td>Kết thúc 6 ván với điểm 100, 500, 300, 900, 200, 400</td><td>Bảng điểm cao: 900, 500, 400, 300, 200.</td><td>CN-09</td></tr>
+          <tr><td class="mono">TC-51</td><td>Ván mới bằng đúng kỷ lục hiện tại</td><td>Không hiện "Kỷ lục mới!"; ván mới xếp sau ván cũ cùng điểm.</td><td>CN-09</td></tr>
+          <tr><td class="mono">TC-52</td><td>Ván kết thúc với 0 điểm</td><td>Không thêm vào bảng điểm cao; vẫn tăng số ván đã chơi.</td><td>CN-09</td></tr>
+          <tr><td class="mono">TC-53</td><td>Tắt âm, tải lại trang</td><td>Âm vẫn tắt.</td><td>CN-13</td></tr>
+          <tr><td class="mono">TC-54</td><td>Sửa tay <code>hungquafpt:v1</code> thành chuỗi không phải JSON</td><td>Game mở bình thường với dữ liệu mặc định.</td><td>Tài liệu 04 §6</td></tr>
+          <tr><td class="mono">TC-55</td><td><code>highScores</code> có mục với <code>score</code> là chữ</td><td>Bỏ qua mục sai, giữ các mục đúng.</td><td>Tài liệu 04 §6</td></tr>
+          <tr><td class="mono">TC-56</td><td>Chơi ở chế độ ẩn danh Safari / chặn bộ nhớ</td><td>Chơi được; màn hình Điểm cao báo không lưu được.</td><td>Tài liệu 04 §6</td></tr>
+          <tr><td class="mono">TC-57</td><td>Xoá dữ liệu trong Cài đặt</td><td>Phải xác nhận 2 bước; sau đó bảng điểm trống, cài đặt về mặc định, hướng dẫn hiện lại.</td><td>MH-08</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Hiệu năng &amp; tiếp cận</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Mã</th><th>Tình huống</th><th>Kết quả mong đợi</th><th>Liên quan</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">TC-60</td><td>Chơi ở cấp 15 trong 2 phút trên Android tầm trung</td><td>Trung bình ≥ 55 khung hình/giây, không giật quá 100 ms.</td><td>PCN-01</td></tr>
+          <tr><td class="mono">TC-61</td><td>Chơi liên tục 10 phút (nhiều ván)</td><td>Bộ nhớ không tăng liên tục (không rò rỉ).</td><td>PCN-01</td></tr>
+          <tr><td class="mono">TC-62</td><td>Tải lần đầu trên mạng 4G mô phỏng</td><td>Vào menu &lt; 3 giây; tổng tải ≤ 2 MB.</td><td>PCN-02</td></tr>
+          <tr><td class="mono">TC-63</td><td>Tải xong rồi tắt mạng, chơi tiếp</td><td>Chơi và lưu điểm bình thường.</td><td>PCN-05</td></tr>
+          <tr><td class="mono">TC-64</td><td>Xem ảnh chụp màn hình chơi ở chế độ đen trắng</td><td>Vẫn phân biệt được vật tốt và vật xấu.</td><td>PCN-06</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>4. Tiêu chí nghiệm thu</h2>
+    <ul>
+      <li>100% ca kiểm thử của các tính năng <span class="tag must">Bắt buộc</span> đạt trên mọi thiết bị <span class="tag must">Bắt buộc</span>.</li>
+      <li>Không còn lỗi mức nghiêm trọng (treo game, mất dữ liệu, không điều khiển được).</li>
+      <li>Playtest: ít nhất 80% người chơi tự hiểu luật sau ván đầu tiên; thời gian ván trung bình từ 60 đến 180 giây.</li>
+      <li>Logic luật chơi có unit test, độ phủ ≥ 90%.</li>
+    </ul>
+
+    <h2>5. Mức độ lỗi</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Mức</th><th>Định nghĩa</th><th>Ví dụ</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag must">Nghiêm trọng</span></td><td>Không chơi được hoặc mất dữ liệu</td><td>Treo khi hết mạng; mất bảng điểm cao sau khi cập nhật</td></tr>
+          <tr><td><span class="tag should">Cao</span></td><td>Sai luật chơi hoặc sai điểm</td><td>Hứng vật xấu nhưng không mất mạng</td></tr>
+          <tr><td><span class="tag info">Trung bình</span></td><td>Ảnh hưởng trải nghiệm, có cách khắc phục</td><td>Âm thanh trễ trên Safari</td></tr>
+          <tr><td><span class="tag could">Thấp</span></td><td>Lỗi hiển thị nhỏ</td><td>Chữ lệch 2 px trên màn hình Kết thúc</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <nav class="footer-nav">
+      <a href="04-quy-tac-du-lieu.html">← 04 · Quy tắc &amp; dữ liệu</a>
+      <a href="index.html">Mục lục →</a>
+    </nav>
+  </main>
+</div>
+</body>
+</html>

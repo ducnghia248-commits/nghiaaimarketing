@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>02 · Chức năng — Hứng Quà FPT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&family=JetBrains+Mono&display=swap">
+  <link rel="stylesheet" href="../design/tokens.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a class="brand" href="index.html">Hứng Quà FPT<small>Tài liệu thiết kế game</small></a>
+    <ul class="nav">
+      <li><a href="index.html">Mục lục</a></li>
+      <li><a href="01-tong-quan.html">01 · Tổng quan</a></li>
+      <li><a href="02-chuc-nang.html" aria-current="page">02 · Chức năng</a></li>
+      <li><a href="03-man-hinh.html">03 · Màn hình</a></li>
+      <li><a href="04-quy-tac-du-lieu.html">04 · Quy tắc &amp; dữ liệu</a></li>
+      <li><a href="05-ke-hoach-test.html">05 · Kế hoạch test</a></li>
+    </ul>
+  </aside>
+  <main>
+    <p class="eyebrow">Tài liệu 02</p>
+    <h1>Chức năng</h1>
+    <p class="lead">Danh sách tính năng của bản đầu. Mức ưu tiên: <span class="tag must">Bắt buộc</span> phải có mới phát hành, <span class="tag should">Nên có</span> làm nếu kịp, <span class="tag could">Có thể</span> để bản sau.</p>
+
+    <h2>Danh sách tính năng</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Mã</th><th>Tính năng</th><th>Mô tả</th><th>Ưu tiên</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">CN-01</td><td>Di chuyển giỏ</td><td>Giỏ di chuyển ngang, không ra khỏi mép màn hình. Hỗ trợ bàn phím, chuột và cảm ứng (xem bảng điều khiển bên dưới).</td><td><span class="tag must">Bắt buộc</span></td></tr>
+          <tr><td class="mono">CN-02</td><td>Sinh vật rơi</td><td>Vật xuất hiện ở vị trí ngang ngẫu nhiên phía trên màn hình và rơi thẳng xuống. Tỉ lệ từng loại theo bảng ở tài liệu 04.</td><td><span class="tag must">Bắt buộc</span></td></tr>
+          <tr><td class="mono">CN-03</td><td>Va chạm &amp; tính điểm</td><td>Phát hiện vật chạm miệng giỏ; cộng điểm, trừ mạng hoặc kích hoạt hỗ trợ tuỳ loại vật.</td><td><span class="tag must">Bắt buộc</span></td></tr>
+          <tr><td class="mono">CN-04</td><td>Hệ thống 3 mạng</td><td>Bắt đầu với 3 mạng, tối đa 5. Hết mạng thì kết thúc ván.</td><td><span class="tag must">Bắt buộc</span></td></tr>
+          <tr><td class="mono">CN-05</td><td>Độ khó tăng dần</td><td>Cứ mỗi 20 giây lên 1 cấp: vật rơi nhanh hơn và xuất hiện dày hơn, có giới hạn trên.</td><td><span class="tag must">Bắt buộc</span></td></tr>
+          <tr><td class="mono">CN-06</td><td>HUD trong ván</td><td>Hiển thị điểm, mạng, cấp độ, combo và hỗ trợ đang có hiệu lực.</td><td><span class="tag must">Bắt buộc</span></td></tr>
+          <tr><td class="mono">CN-07</td><td>Tạm dừng / tiếp tục</td><td>Nút tạm dừng trên màn hình, phím <code>P</code> hoặc <code>Esc</code>. Tự tạm dừng khi chuyển tab, thu nhỏ trình duyệt hoặc khoá màn hình.</td><td><span class="tag must">Bắt buộc</span></td></tr>
+          <tr><td class="mono">CN-08</td><td>Kết thúc ván</td><td>Hiện điểm, thời gian chơi, combo cao nhất, báo nếu đạt kỷ lục mới. Cho chơi lại ngay.</td><td><span class="tag must">Bắt buộc</span></td></tr>
+          <tr><td class="mono">CN-09</td><td>Lưu điểm cao</td><td>Lưu 5 điểm cao nhất trên máy cùng ngày chơi.</td><td><span class="tag must">Bắt buộc</span></td></tr>
+          <tr><td class="mono">CN-10</td><td>Combo &amp; hệ số điểm</td><td>Hứng liên tiếp vật tốt tăng hệ số điểm (x1 → x1,5 → x2). Mất mạng thì combo về 0.</td><td><span class="tag should">Nên có</span></td></tr>
+          <tr><td class="mono">CN-11</td><td>Vật hỗ trợ</td><td>Khiên bảo vệ, nhân đôi điểm, thêm mạng (chi tiết ở tài liệu 04).</td><td><span class="tag should">Nên có</span></td></tr>
+          <tr><td class="mono">CN-12</td><td>Hướng dẫn chơi</td><td>Màn hình ngắn giới thiệu vật tốt, vật xấu, cách điều khiển. Tự hiện ở lần chơi đầu tiên.</td><td><span class="tag should">Nên có</span></td></tr>
+          <tr><td class="mono">CN-13</td><td>Âm thanh</td><td>Hiệu ứng khi hứng, mất mạng, lên cấp, kết thúc ván. Bật/tắt riêng âm hiệu ứng và nhạc nền.</td><td><span class="tag should">Nên có</span></td></tr>
+          <tr><td class="mono">CN-14</td><td>Rung trên điện thoại</td><td>Rung nhẹ khi mất mạng, nếu thiết bị hỗ trợ. Có thể tắt.</td><td><span class="tag could">Có thể</span></td></tr>
+          <tr><td class="mono">CN-15</td><td>Chia sẻ điểm</td><td>Nút chia sẻ điểm qua tính năng chia sẻ của điện thoại hoặc sao chép đoạn chữ.</td><td><span class="tag could">Có thể</span></td></tr>
+          <tr><td class="mono">CN-16</td><td>Thống kê cá nhân</td><td>Tổng số ván, tổng vật đã hứng, sản phẩm hứng nhiều nhất.</td><td><span class="tag could">Có thể</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Điều khiển</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Thao tác</th><th>PC</th><th>Điện thoại / máy tính bảng</th></tr></thead>
+        <tbody>
+          <tr><td>Di chuyển giỏ</td><td>Phím <code>←</code> <code>→</code> hoặc <code>A</code> <code>D</code>; hoặc rê chuột, giỏ đi theo con trỏ</td><td>Đặt ngón tay và kéo ngang, giỏ đi theo ngón tay</td></tr>
+          <tr><td>Tạm dừng</td><td><code>P</code>, <code>Esc</code> hoặc bấm nút ⏸</td><td>Chạm nút ⏸ ở góc trên</td></tr>
+          <tr><td>Bắt đầu / chơi lại</td><td><code>Enter</code>, <code>Space</code> hoặc bấm nút</td><td>Chạm nút</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>Yêu cầu điều khiển</h3>
+    <ul>
+      <li>Khi dùng bàn phím, giỏ tăng tốc nhẹ trong 0,15 giây đầu rồi giữ tốc độ đều, để vừa dễ chỉnh vị trí nhỏ vừa kịp đuổi theo vật ở xa.</li>
+      <li>Khi kéo bằng tay hoặc chuột, giỏ đi theo vị trí ngón tay/con trỏ nhưng có giới hạn tốc độ tối đa, tránh dịch chuyển tức thời từ mép này sang mép kia.</li>
+      <li>Khi đang chơi trên điện thoại, chặn cuộn trang, phóng to và menu nhấn giữ để không làm gián đoạn ván.</li>
+      <li>Giỏ và vật được vẽ theo tỉ lệ khung chơi, nên khi đổi kích thước hay xoay màn hình, độ khó không thay đổi.</li>
+    </ul>
+
+    <h2>Yêu cầu phi chức năng</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Mã</th><th>Yêu cầu</th><th>Mức đạt</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">PCN-01</td><td>Hiệu năng</td><td>Ổn định ≥ 55 khung hình/giây trên điện thoại tầm trung (Android 2–3 năm tuổi, iPhone 11 trở lên).</td></tr>
+          <tr><td class="mono">PCN-02</td><td>Dung lượng tải</td><td>Tổng tài nguyên lần đầu ≤ 2 MB; vào được menu trong &lt; 3 giây trên 4G.</td></tr>
+          <tr><td class="mono">PCN-03</td><td>Trình duyệt</td><td>2 phiên bản mới nhất của Chrome, Safari (cả iOS), Edge, Firefox và Cốc Cốc.</td></tr>
+          <tr><td class="mono">PCN-04</td><td>Màn hình</td><td>Từ 360 px chiều rộng trở lên; ưu tiên màn hình dọc trên điện thoại; trên PC khung chơi đặt giữa màn hình.</td></tr>
+          <tr><td class="mono">PCN-05</td><td>Ngoại tuyến</td><td>Sau khi đã tải xong, mất mạng vẫn chơi tiếp được.</td></tr>
+          <tr><td class="mono">PCN-06</td><td>Tiếp cận</td><td>Vật tốt và vật xấu phân biệt bằng cả hình dạng, không chỉ bằng màu. Chữ trên HUD đủ tương phản (WCAG AA).</td></tr>
+          <tr><td class="mono">PCN-07</td><td>Riêng tư</td><td>Không thu thập dữ liệu cá nhân; không gửi dữ liệu ra ngoài thiết bị ở bản đầu.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <nav class="footer-nav">
+      <a href="01-tong-quan.html">← 01 · Tổng quan</a>
+      <a href="03-man-hinh.html">03 · Màn hình →</a>
+    </nav>
+  </main>
+</div>
+</body>
+</html>

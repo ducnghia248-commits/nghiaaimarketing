@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>01 · Tổng quan — Hứng Quà FPT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&family=JetBrains+Mono&display=swap">
+  <link rel="stylesheet" href="../design/tokens.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a class="brand" href="index.html">Hứng Quà FPT<small>Tài liệu thiết kế game</small></a>
+    <ul class="nav">
+      <li><a href="index.html">Mục lục</a></li>
+      <li><a href="01-tong-quan.html" aria-current="page">01 · Tổng quan</a></li>
+      <li><a href="02-chuc-nang.html">02 · Chức năng</a></li>
+      <li><a href="03-man-hinh.html">03 · Màn hình</a></li>
+      <li><a href="04-quy-tac-du-lieu.html">04 · Quy tắc &amp; dữ liệu</a></li>
+      <li><a href="05-ke-hoach-test.html">05 · Kế hoạch test</a></li>
+    </ul>
+  </aside>
+  <main>
+    <p class="eyebrow">Tài liệu 01</p>
+    <h1>Tổng quan</h1>
+    <p class="lead">Hứng Quà FPT là game ngắn, dễ chơi, mỗi ván 1 đến 3 phút. Người chơi kéo giỏ để hứng sản phẩm FPT đang rơi và né vật xấu. Game nhắm tới việc giải trí nhanh và giúp người chơi nhớ tới các sản phẩm FPT.</p>
+
+    <h2>Ý tưởng cốt lõi</h2>
+    <p>Vật phẩm rơi từ mép trên màn hình xuống. Người chơi di chuyển giỏ theo chiều ngang ở cuối màn hình:</p>
+    <ul>
+      <li><strong>Hứng vật tốt</strong> (sản phẩm FPT) để được điểm.</li>
+      <li><strong>Né vật xấu</strong> (virus, mất kết nối…) vì hứng phải sẽ mất 1 mạng.</li>
+      <li><strong>Để lọt vật tốt</strong> xuống đáy cũng mất 1 mạng.</li>
+      <li>Hết 3 mạng thì ván kết thúc. Càng chơi lâu, vật rơi càng nhanh và dày hơn.</li>
+    </ul>
+
+    <h2>Kết quả phỏng vấn</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>#</th><th>Câu hỏi</th><th>Trả lời</th></tr></thead>
+        <tbody>
+          <tr><td class="num">1</td><td>Thể loại</td><td>Arcade / phản xạ</td></tr>
+          <tr><td class="num">2</td><td>Cơ chế chính</td><td>Bắt vật rơi: hứng vật tốt, tránh vật xấu</td></tr>
+          <tr><td class="num">3</td><td>Nền tảng &amp; điều khiển</td><td>Web, cả PC và điện thoại</td></tr>
+          <tr><td class="num">4</td><td>Luật thắng/thua</td><td>Vô tận, 3 mạng, tốc độ rơi tăng dần</td></tr>
+          <tr><td class="num">5</td><td>Chủ đề</td><td>Sản phẩm FPT</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Người chơi mục tiêu</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Khách hàng &amp; khách tiềm năng</h3>
+        <p>Chơi trên điện thoại khi được chia sẻ link qua mạng xã hội hoặc tại sự kiện. Cần vào chơi ngay, không phải cài đặt hay đăng nhập.</p>
+      </div>
+      <div class="card">
+        <h3>Nhân viên &amp; đối tác</h3>
+        <p>Chơi trên PC hoặc điện thoại trong các hoạt động nội bộ, thi điểm cao với nhau.</p>
+      </div>
+    </div>
+
+    <h2>Mục tiêu sản phẩm</h2>
+    <ul>
+      <li>Học luật chơi trong <strong>dưới 10 giây</strong>, không cần đọc hướng dẫn dài.</li>
+      <li>Chạy mượt (mục tiêu 60 khung hình/giây) trên điện thoại tầm trung.</li>
+      <li>Tải xong và vào được màn hình chính trong <strong>dưới 3 giây</strong> trên mạng 4G.</li>
+      <li>Làm người chơi muốn chơi lại để phá điểm cao của mình.</li>
+    </ul>
+
+    <h2>Phạm vi</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Trong phạm vi (bản đầu)</h3>
+        <ul>
+          <li>Một chế độ chơi: vô tận, 3 mạng</li>
+          <li>Điều khiển bằng bàn phím, chuột và cảm ứng</li>
+          <li>Vật tốt, vật xấu, vật hỗ trợ</li>
+          <li>Điểm cao lưu trên máy</li>
+          <li>Âm thanh bật/tắt</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Ngoài phạm vi (để sau)</h3>
+        <ul>
+          <li>Đăng nhập, tài khoản người chơi</li>
+          <li>Bảng xếp hạng chung trên server</li>
+          <li>Đổi điểm lấy quà, mã khuyến mãi</li>
+          <li>Nhiều chế độ chơi, nhiều nhân vật</li>
+          <li>Ứng dụng cài đặt (App Store/Google Play)</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>Quyết định đã duyệt</h2>
+    <p>Các giả định dưới đây đã được duyệt ngày 06/11/2026. Cột cuối ghi những phần phải làm lại nếu sau này thay đổi quyết định.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Mã</th><th>Quyết định</th><th>Phải làm lại nếu đổi</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">GD-01</td><td>Dữ liệu chỉ lưu cục bộ trên trình duyệt, không có server.</td><td>Cần thêm API, cơ sở dữ liệu và chống gian lận điểm.</td></tr>
+          <tr><td class="mono">GD-02</td><td>Vật tốt gồm: Modem Wi-Fi, FPT Play Box, FPT Camera, gói Internet, combo Internet + Truyền hình.</td><td>Thay danh sách và hình vẽ trong tài liệu 04.</td></tr>
+          <tr><td class="mono">GD-03</td><td>Hình ảnh là icon minh hoạ tự vẽ. Logo và nhận diện thương hiệu FPT chỉ dùng khi bộ phận thương hiệu đã duyệt.</td><td>Cần bộ asset chính thức và quy định dùng logo.</td></tr>
+          <tr><td class="mono">GD-04</td><td>Giao diện tiếng Việt, chưa cần đa ngôn ngữ.</td><td>Cần tách văn bản ra file ngôn ngữ.</td></tr>
+          <tr><td class="mono">GD-05</td><td>Game là trang web tĩnh, có thể đặt trong dự án hiện tại hoặc host riêng.</td><td>Ảnh hưởng tới cách triển khai, không ảnh hưởng luật chơi.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Thuật ngữ</h2>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Ván</th><td>Một lượt chơi, từ lúc bấm Chơi đến khi hết mạng.</td></tr>
+        <tr><th>Vật tốt</th><td>Sản phẩm FPT. Hứng được thì cộng điểm, để lọt thì mất mạng.</td></tr>
+        <tr><th>Vật xấu</th><td>Vật cần né. Hứng phải thì mất mạng.</td></tr>
+        <tr><th>Vật hỗ trợ</th><td>Vật hiếm, cho lợi thế tạm thời. Để lọt không bị phạt.</td></tr>
+        <tr><th>Combo</th><td>Số vật tốt hứng liên tiếp mà không mất mạng.</td></tr>
+        <tr><th>Cấp độ</th><td>Mức khó hiện tại, tăng dần theo thời gian chơi.</td></tr>
+      </table>
+    </div>
+
+    <nav class="footer-nav">
+      <a href="index.html">← Mục lục</a>
+      <a href="02-chuc-nang.html">02 · Chức năng →</a>
+    </nav>
+  </main>
+</div>
+</body>
+</html>

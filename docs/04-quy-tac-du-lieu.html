@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>04 · Quy tắc &amp; dữ liệu — Hứng Quà FPT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&family=JetBrains+Mono&display=swap">
+  <link rel="stylesheet" href="../design/tokens.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a class="brand" href="index.html">Hứng Quà FPT<small>Tài liệu thiết kế game</small></a>
+    <ul class="nav">
+      <li><a href="index.html">Mục lục</a></li>
+      <li><a href="01-tong-quan.html">01 · Tổng quan</a></li>
+      <li><a href="02-chuc-nang.html">02 · Chức năng</a></li>
+      <li><a href="03-man-hinh.html">03 · Màn hình</a></li>
+      <li><a href="04-quy-tac-du-lieu.html" aria-current="page">04 · Quy tắc &amp; dữ liệu</a></li>
+      <li><a href="05-ke-hoach-test.html">05 · Kế hoạch test</a></li>
+    </ul>
+  </aside>
+  <main>
+    <p class="eyebrow">Tài liệu 04</p>
+    <h1>Quy tắc &amp; dữ liệu</h1>
+    <p class="lead">Luật chơi chi tiết, số liệu cân bằng và cấu trúc dữ liệu lưu trữ. Mọi con số ở đây là giá trị khởi đầu, sẽ chỉnh lại sau khi chơi thử; nên đặt chúng trong một file cấu hình, không viết cứng trong code.</p>
+
+    <div class="callout">
+      <p><strong>Quy ước đơn vị:</strong> <code>W</code> là chiều rộng, <code>H</code> là chiều cao khung chơi. Kích thước và tốc độ tính theo W/H để game chơi giống nhau trên mọi màn hình.</p>
+    </div>
+
+    <h2>1. Vật phẩm</h2>
+    <h3>Vật tốt: sản phẩm FPT <span class="tag could">Đã duyệt GD-02</span></h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Mã</th><th>Tên hiển thị</th><th class="num">Điểm gốc</th><th class="num">Tỉ trọng</th><th class="num">Tốc độ</th><th>Ghi chú</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">modem</td><td>Modem Wi-Fi</td><td class="num">10</td><td class="num">30</td><td class="num">×1,0</td><td>Vật phổ biến nhất</td></tr>
+          <tr><td class="mono">playbox</td><td>FPT Play Box</td><td class="num">10</td><td class="num">25</td><td class="num">×1,0</td><td></td></tr>
+          <tr><td class="mono">camera</td><td>FPT Camera</td><td class="num">15</td><td class="num">15</td><td class="num">×1,1</td><td></td></tr>
+          <tr><td class="mono">internet</td><td>Gói Internet tốc độ cao</td><td class="num">20</td><td class="num">8</td><td class="num">×1,25</td><td>Rơi nhanh, khó hứng hơn</td></tr>
+          <tr><td class="mono">combo</td><td>Combo Internet + Truyền hình</td><td class="num">50</td><td class="num">2</td><td class="num">×1,4</td><td>Vật hiếm, màu vàng, có vệt sáng</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Vật xấu</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Mã</th><th>Tên hiển thị</th><th>Khi hứng phải</th><th class="num">Tỉ trọng</th><th class="num">Tốc độ</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">virus</td><td>Virus</td><td>−1 mạng, combo về 0</td><td class="num">12</td><td class="num">×1,0</td></tr>
+          <tr><td class="mono">offline</td><td>Mất kết nối (đám mây gạch chéo)</td><td>−1 mạng, combo về 0</td><td class="num">8</td><td class="num">×1,15</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Vật xấu luôn có hình tròn, viền răng cưa và màu nóng; vật tốt có hình vuông bo góc. Như vậy phân biệt được kể cả với người mù màu (PCN-06). Để lọt vật xấu xuống đáy thì không sao.</p>
+
+    <h3>Vật hỗ trợ</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Mã</th><th>Tên</th><th>Tác dụng</th><th class="num">Tỉ trọng</th><th>Điều kiện xuất hiện</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">shield</td><td>Khiên</td><td>Chặn lần mất mạng tiếp theo trong 8 giây</td><td class="num">1,5</td><td>Từ cấp 2</td></tr>
+          <tr><td class="mono">double</td><td>Nhân đôi</td><td>×2 điểm trong 10 giây</td><td class="num">1,5</td><td>Từ cấp 2</td></tr>
+          <tr><td class="mono">heart</td><td>Thêm mạng</td><td>+1 mạng (tối đa 5)</td><td class="num">0,8</td><td>Từ cấp 4, chỉ khi đang &lt; 5 mạng</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <ul>
+      <li>Để lọt vật hỗ trợ: không bị phạt.</li>
+      <li>Hứng lại cùng loại hỗ trợ khi đang có hiệu lực: <strong>đặt lại</strong> thời gian, không cộng dồn.</li>
+      <li>Mỗi lúc có tối đa 1 vật hỗ trợ trên màn hình.</li>
+    </ul>
+
+    <h2>2. Sinh vật rơi</h2>
+    <ol>
+      <li>Mỗi lần sinh, chọn loại vật ngẫu nhiên theo <strong>tỉ trọng</strong> (xác suất = tỉ trọng ÷ tổng tỉ trọng các vật đủ điều kiện).</li>
+      <li>Tỉ trọng vật xấu nhân thêm <code>1 + 0,09 × (cấp − 1)</code>, nhưng tổng tỉ lệ vật xấu không vượt quá <strong>35%</strong>.</li>
+      <li>Vị trí ngang ngẫu nhiên trong khoảng <code>[0,06W; 0,94W]</code>.</li>
+      <li><strong>Luật công bằng:</strong> vật tốt mới sinh phải hứng được, tức là khoảng cách ngang tới vật tốt trước đó ≤ quãng đường giỏ đi được trong khoảng chênh lệch thời gian chạm đáy của hai vật, nhân 0,8. Nếu không thoả, chọn lại vị trí (tối đa 5 lần), sau đó đổi vật thành vật xấu.</li>
+      <li>Hai vật không được xuất hiện chồng lên nhau: khoảng cách giữa tâm hai vật ≥ 1,2 lần kích thước vật.</li>
+    </ol>
+
+    <h2>3. Độ khó theo cấp</h2>
+    <p>Cấp bắt đầu từ 1, cứ <strong>20 giây</strong> chơi (không tính lúc tạm dừng) thì tăng 1, tối đa <strong>cấp 15</strong>.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Đại lượng</th><th>Công thức</th><th class="num">Cấp 1</th><th class="num">Cấp 8</th><th class="num">Cấp 15</th></tr></thead>
+        <tbody>
+          <tr><td>Tốc độ rơi gốc</td><td class="mono">0,35H/s × (1 + 0,08 × (cấp − 1))</td><td class="num">0,35H/s</td><td class="num">0,55H/s</td><td class="num">0,74H/s</td></tr>
+          <tr><td>Thời gian rơi hết màn hình</td><td>H ÷ tốc độ</td><td class="num">2,9 s</td><td class="num">1,8 s</td><td class="num">1,35 s</td></tr>
+          <tr><td>Khoảng cách giữa 2 lần sinh</td><td class="mono">max(0,4 s; 1,1 s × 0,93^(cấp − 1))</td><td class="num">1,10 s</td><td class="num">0,66 s</td><td class="num">0,40 s</td></tr>
+          <tr><td>Tỉ lệ vật xấu</td><td>Theo mục 2</td><td class="num">~20%</td><td class="num">~28%</td><td class="num">35%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Tốc độ thực tế của mỗi vật = tốc độ rơi gốc × hệ số tốc độ của vật đó (bảng mục 1).</p>
+
+    <h2>4. Giỏ và va chạm</h2>
+    <ul>
+      <li>Giỏ rộng <code>0,22W</code>, cao <code>0,05H</code>, đáy giỏ cách mép dưới <code>0,08H</code>.</li>
+      <li>Tốc độ tối đa của giỏ: <code>1,3W/s</code> (cả bàn phím lẫn kéo tay).</li>
+      <li>Vật có kích thước <code>0,1W</code>; vùng va chạm bằng 80% hình vẽ để người chơi thấy công bằng.</li>
+      <li><strong>Hứng được</strong> khi vùng va chạm của vật chạm vào <em>miệng giỏ</em> (dải trên cùng, cao bằng 30% chiều cao giỏ, rộng bằng giỏ). Vật chạm cạnh bên giỏ thì không tính, tiếp tục rơi.</li>
+      <li><strong>Để lọt</strong> khi mép trên của vật vượt qua mép dưới khung chơi.</li>
+      <li>Mỗi vật chỉ được xử lý một lần (hứng hoặc lọt).</li>
+    </ul>
+
+    <h2>5. Điểm, combo, mạng</h2>
+    <h3>Tính điểm</h3>
+    <p class="mono">điểm nhận = làm tròn xuống(điểm gốc × hệ số combo × (2 nếu đang Nhân đôi, ngược lại 1))</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Combo hiện tại</th><th class="num">Hệ số</th></tr></thead>
+        <tbody>
+          <tr><td>0 – 4</td><td class="num">×1</td></tr>
+          <tr><td>5 – 9</td><td class="num">×1,5</td></tr>
+          <tr><td>10 trở lên</td><td class="num">×2</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <ul>
+      <li>Combo tăng 1 khi hứng vật tốt; tính hệ số <strong>sau khi</strong> tăng combo. Vật hỗ trợ không ảnh hưởng combo.</li>
+      <li>Combo về 0 mỗi khi mất mạng. Nếu Khiên chặn được thì không mất mạng, combo giữ nguyên.</li>
+      <li>Ví dụ: đang combo 4, hứng FPT Camera → combo 5, hệ số ×1,5 → nhận 22 điểm.</li>
+    </ul>
+
+    <h3>Mạng</h3>
+    <ul>
+      <li>Bắt đầu 3 mạng, tối đa 5.</li>
+      <li>Mất 1 mạng khi: hứng vật xấu, hoặc để lọt vật tốt.</li>
+      <li>Nếu đang có Khiên: lần mất mạng đó bị chặn và Khiên biến mất.</li>
+      <li>Sau khi mất mạng, giỏ có <strong>1 giây miễn nhiễm</strong> (nhấp nháy) để không mất nhiều mạng trong cùng một khoảnh khắc. Trong thời gian này vẫn hứng được vật tốt và hỗ trợ.</li>
+      <li>Mạng về 0: dừng sinh vật, chờ 1 giây cho hiệu ứng rồi chuyển sang màn hình Kết thúc.</li>
+    </ul>
+
+    <h2>6. Dữ liệu lưu trên máy <span class="tag could">Đã duyệt GD-01</span></h2>
+    <p>Lưu toàn bộ trong <code>localStorage</code> dưới một khoá duy nhất <code>hungquafpt:v1</code>, giá trị là chuỗi JSON:</p>
+    <div class="card"><pre class="mono" style="margin:0;overflow-x:auto;font-size:var(--text-sm)">{
+  "version": 1,
+  "settings": { "sfx": true, "music": false, "vibration": true },
+  "tutorialSeen": true,
+  "highScores": [
+    { "score": 1380, "playedAt": "2026-11-06T09:12:00+07:00",
+      "durationSec": 134, "maxCombo": 18, "caught": 74 }
+  ],
+  "stats": {
+    "gamesPlayed": 12,
+    "totalCaught": 640,
+    "caughtByItem": { "modem": 210, "playbox": 180, "camera": 130, "internet": 90, "combo": 30 }
+  }
+}</pre></div>
+
+    <h3>Mô tả trường</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Trường</th><th>Kiểu</th><th>Mặc định</th><th>Ràng buộc</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">version</td><td>số nguyên</td><td>1</td><td>Dùng để nâng cấp cấu trúc dữ liệu về sau.</td></tr>
+          <tr><td class="mono">settings.sfx / music / vibration</td><td>true/false</td><td>true / false / true</td><td>Nhạc nền mặc định tắt vì trình duyệt chặn tự phát âm thanh.</td></tr>
+          <tr><td class="mono">tutorialSeen</td><td>true/false</td><td>false</td><td>Chuyển thành true khi bấm Bắt đầu ở màn hình Hướng dẫn.</td></tr>
+          <tr><td class="mono">highScores</td><td>danh sách</td><td>[]</td><td>Tối đa 5 mục, sắp xếp điểm giảm dần; bằng điểm thì ván cũ hơn đứng trước.</td></tr>
+          <tr><td class="mono">highScores[].score</td><td>số nguyên</td><td>—</td><td>Từ 0 đến 9.999.999.</td></tr>
+          <tr><td class="mono">highScores[].playedAt</td><td>chuỗi thời gian ISO 8601</td><td>—</td><td>Thời điểm kết thúc ván, kèm múi giờ.</td></tr>
+          <tr><td class="mono">highScores[].durationSec</td><td>số nguyên</td><td>—</td><td>Số giây chơi thực, không tính tạm dừng.</td></tr>
+          <tr><td class="mono">highScores[].maxCombo, caught</td><td>số nguyên</td><td>—</td><td>≥ 0.</td></tr>
+          <tr><td class="mono">stats.*</td><td>số nguyên</td><td>0</td><td>Chỉ tăng; ≥ 0.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Quy tắc lưu và đọc</h3>
+    <ul>
+      <li><strong>Khi nào lưu:</strong> khi đổi cài đặt; khi ván kết thúc do hết mạng (cập nhật điểm cao và thống kê). Ván bị bỏ giữa chừng (Về menu, Chơi lại, đóng tab) <strong>không</strong> được lưu điểm.</li>
+      <li><strong>Vào bảng điểm cao:</strong> chỉ khi điểm &gt; 0 và (danh sách chưa đủ 5 mục hoặc điểm lớn hơn mục thấp nhất).</li>
+      <li><strong>Kỷ lục mới:</strong> điểm lớn hơn hẳn điểm cao nhất trước đó (bằng điểm thì không tính).</li>
+      <li><strong>Dữ liệu hỏng:</strong> nếu JSON không đọc được hoặc trường sai kiểu thì dùng giá trị mặc định cho trường đó, giữ các trường còn đúng, và không bao giờ làm game bị lỗi trắng màn hình.</li>
+      <li><strong>Không lưu được</strong> (chế độ ẩn danh, trình duyệt chặn bộ nhớ, đầy bộ nhớ): game vẫn chơi bình thường; màn hình Điểm cao báo "Trình duyệt này không lưu được điểm".</li>
+      <li><strong>Phiên bản khác:</strong> gặp <code>version</code> cao hơn phiên bản game hiểu được thì chỉ đọc, không ghi đè.</li>
+    </ul>
+
+    <h2>7. Dữ liệu cấu hình game</h2>
+    <p>Các bảng ở mục 1–5 nên nằm trong một file cấu hình (ví dụ <code>game-config.json</code>) để chỉnh cân bằng mà không phải sửa logic. Mỗi vật phẩm gồm: <code>id</code>, <code>name</code>, <code>kind</code> (good/bad/power), <code>points</code>, <code>weight</code>, <code>speedFactor</code>, <code>minLevel</code>, <code>sprite</code>.</p>
+
+    <nav class="footer-nav">
+      <a href="03-man-hinh.html">← 03 · Màn hình</a>
+      <a href="05-ke-hoach-test.html">05 · Kế hoạch test →</a>
+    </nav>
+  </main>
+</div>
+</body>
+</html>

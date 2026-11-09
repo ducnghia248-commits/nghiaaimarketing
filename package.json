@@ -1,0 +1,54 @@
+{
+  "name": "fpt-play-and-win",
+  "version": "1.0.0",
+  "private": true,
+  "description": "FPT TELECOM – PLAY & WIN: nền tảng Mini Game tương tác cho khách hàng FPT Telecom",
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "next start -p 3000",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test tests/*.test.ts",
+    "db:generate": "drizzle-kit generate",
+    "gen:puzzles": "node scripts/gen-puzzles.mjs",
+    "db:backup": "tsx scripts/backup.ts",
+    "db:restore": "tsx scripts/restore.ts"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "0.3.16",
+    "@react-three/drei": "10.7.6",
+    "@react-three/fiber": "9.3.0",
+    "bcryptjs": "3.0.2",
+    "canvas-confetti": "1.9.3",
+    "drizzle-orm": "0.44.7",
+    "framer-motion": "12.23.24",
+    "jose": "6.1.0",
+    "next": "15.5.29",
+    "pg": "8.16.3",
+    "qrcode": "1.5.4",
+    "react": "19.2.9",
+    "react-dom": "19.2.9",
+    "read-excel-file": "5.8.8",
+    "three": "0.178.0",
+    "write-excel-file": "2.3.10",
+    "zod": "3.25.76"
+  },
+  "overrides": {
+    "motion-dom": "12.23.23",
+    "motion-utils": "12.23.6"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.1.14",
+    "@types/canvas-confetti": "1.9.0",
+    "@types/node": "22.18.8",
+    "@types/pg": "8.15.5",
+    "@types/qrcode": "1.5.5",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.1",
+    "@types/three": "0.178.1",
+    "drizzle-kit": "0.31.5",
+    "tailwindcss": "4.1.14",
+    "tsx": "4.20.6",
+    "typescript": "5.9.3"
+  }
+}

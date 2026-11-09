@@ -1,0 +1,137 @@
+[
+  {
+    "title": "Phòng khách có Router WiFi FPT",
+    "theme": "WiFi",
+    "leftUrl": "/puzzles/living-room-a.svg",
+    "rightUrl": "/puzzles/living-room-b.svg",
+    "width": 800,
+    "height": 600,
+    "regions": [
+      {
+        "id": "sun",
+        "x": 0.25,
+        "y": 0.1733,
+        "r": 0.045,
+        "label": "Mặt trời ngoài cửa sổ"
+      },
+      {
+        "id": "painting",
+        "x": 0.525,
+        "y": 0.1633,
+        "r": 0.03,
+        "label": "Mặt trời trong bức tranh"
+      },
+      {
+        "id": "clock",
+        "x": 0.7,
+        "y": 0.1667,
+        "r": 0.055,
+        "label": "Kim đồng hồ"
+      },
+      {
+        "id": "antenna",
+        "x": 0.8888,
+        "y": 0.2533,
+        "r": 0.0375,
+        "label": "Ăng-ten Router WiFi"
+      },
+      {
+        "id": "cushion",
+        "x": 0.6325,
+        "y": 0.5683,
+        "r": 0.055,
+        "label": "Màu gối tựa"
+      }
+    ]
+  },
+  {
+    "title": "Ngôi nhà an toàn với FPT Camera",
+    "theme": "FPT Camera",
+    "leftUrl": "/puzzles/safe-home-a.svg",
+    "rightUrl": "/puzzles/safe-home-b.svg",
+    "width": 800,
+    "height": 600,
+    "regions": [
+      {
+        "id": "door-number",
+        "x": 0.5125,
+        "y": 0.635,
+        "r": 0.0375,
+        "label": "Số nhà"
+      },
+      {
+        "id": "camera",
+        "x": 0.71,
+        "y": 0.4467,
+        "r": 0.045,
+        "label": "Màu FPT Camera"
+      },
+      {
+        "id": "window",
+        "x": 0.375,
+        "y": 0.5167,
+        "r": 0.065,
+        "label": "Đèn trong cửa sổ"
+      },
+      {
+        "id": "bird",
+        "x": 0.1938,
+        "y": 0.4167,
+        "r": 0.04,
+        "label": "Chú chim trên cây"
+      },
+      {
+        "id": "mailbox",
+        "x": 0.8925,
+        "y": 0.6667,
+        "r": 0.0425,
+        "label": "Cờ hộp thư"
+      }
+    ]
+  },
+  {
+    "title": "Góc giải trí cùng FPT Play",
+    "theme": "FPT Play",
+    "leftUrl": "/puzzles/entertainment-a.svg",
+    "rightUrl": "/puzzles/entertainment-b.svg",
+    "width": 800,
+    "height": 600,
+    "regions": [
+      {
+        "id": "lamp",
+        "x": 0.8125,
+        "y": 0.1033,
+        "r": 0.05,
+        "label": "Đèn trần"
+      },
+      {
+        "id": "tile",
+        "x": 0.4713,
+        "y": 0.375,
+        "r": 0.065,
+        "label": "Màu ô phim giữa"
+      },
+      {
+        "id": "speaker",
+        "x": 0.8625,
+        "y": 0.5833,
+        "r": 0.0875,
+        "label": "Loa cột"
+      },
+      {
+        "id": "remote",
+        "x": 0.5313,
+        "y": 0.7933,
+        "r": 0.0425,
+        "label": "Điều khiển TV"
+      },
+      {
+        "id": "gamepad",
+        "x": 0.6312,
+        "y": 0.7833,
+        "r": 0.0425,
+        "label": "Màu tay cầm game"
+      }
+    ]
+  }
+]

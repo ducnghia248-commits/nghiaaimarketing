@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>03 · Màn hình — Hứng Quà FPT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&family=JetBrains+Mono&display=swap">
+  <link rel="stylesheet" href="../design/tokens.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a class="brand" href="index.html">Hứng Quà FPT<small>Tài liệu thiết kế game</small></a>
+    <ul class="nav">
+      <li><a href="index.html">Mục lục</a></li>
+      <li><a href="01-tong-quan.html">01 · Tổng quan</a></li>
+      <li><a href="02-chuc-nang.html">02 · Chức năng</a></li>
+      <li><a href="03-man-hinh.html" aria-current="page">03 · Màn hình</a></li>
+      <li><a href="04-quy-tac-du-lieu.html">04 · Quy tắc &amp; dữ liệu</a></li>
+      <li><a href="05-ke-hoach-test.html">05 · Kế hoạch test</a></li>
+    </ul>
+  </aside>
+  <main>
+    <p class="eyebrow">Tài liệu 03</p>
+    <h1>Màn hình</h1>
+    <p class="lead">Game có 8 màn hình. Hình minh hoạ dưới đây là khung bố cục (wireframe) trên điện thoại dọc, không phải thiết kế đồ hoạ cuối cùng. Trên PC, khung chơi giữ tỉ lệ 9:16 và đặt giữa màn hình.</p>
+
+    <h2>Luồng màn hình</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Từ</th><th>Hành động</th><th>Đến</th></tr></thead>
+        <tbody>
+          <tr><td>MH-01 Tải</td><td>Tải xong tài nguyên</td><td>MH-02 Menu chính</td></tr>
+          <tr><td>MH-02 Menu chính</td><td>Bấm <strong>Chơi</strong> (lần đầu)</td><td>MH-03 Hướng dẫn</td></tr>
+          <tr><td>MH-02 Menu chính</td><td>Bấm <strong>Chơi</strong> (đã xem hướng dẫn)</td><td>MH-04 Chơi</td></tr>
+          <tr><td>MH-02 Menu chính</td><td>Bấm <strong>Điểm cao</strong> / <strong>Cài đặt</strong> / <strong>Cách chơi</strong></td><td>MH-07 / MH-08 / MH-03</td></tr>
+          <tr><td>MH-03 Hướng dẫn</td><td>Bấm <strong>Bắt đầu</strong></td><td>MH-04 Chơi</td></tr>
+          <tr><td>MH-04 Chơi</td><td>Bấm ⏸, phím P/Esc, chuyển tab</td><td>MH-05 Tạm dừng</td></tr>
+          <tr><td>MH-04 Chơi</td><td>Hết mạng</td><td>MH-06 Kết thúc</td></tr>
+          <tr><td>MH-05 Tạm dừng</td><td><strong>Tiếp tục</strong> / <strong>Chơi lại</strong> / <strong>Về menu</strong></td><td>MH-04 (đếm ngược 3 giây) / MH-04 ván mới / MH-02</td></tr>
+          <tr><td>MH-06 Kết thúc</td><td><strong>Chơi lại</strong> / <strong>Về menu</strong></td><td>MH-04 ván mới / MH-02</td></tr>
+          <tr><td>MH-07, MH-08</td><td>Bấm <strong>Quay lại</strong></td><td>Màn hình trước đó</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout">
+      <p>Khi chọn <strong>Về menu</strong> giữa ván, game hỏi xác nhận vì điểm của ván đó sẽ không được lưu.</p>
+    </div>
+
+    <h2>Chi tiết từng màn hình</h2>
+    <div class="screens">
+
+      <section class="screen-spec">
+        <div class="phone" aria-label="Minh hoạ màn hình tải">
+          <div class="center">
+            <div class="title">Hứng Quà FPT</div>
+            <div style="width:70%;height:8px;border-radius:4px;background:var(--color-border)"><div style="width:60%;height:100%;border-radius:4px;background:var(--color-primary)"></div></div>
+            <div>Đang tải… 60%</div>
+          </div>
+        </div>
+        <h3>MH-01 · Tải</h3>
+        <ul>
+          <li>Tên game và thanh tiến độ tải tài nguyên.</li>
+          <li>Tải quá 10 giây: hiện dòng "Mạng chậm, vui lòng chờ" kèm nút <strong>Thử lại</strong>.</li>
+        </ul>
+      </section>
+
+      <section class="screen-spec">
+        <div class="phone" aria-label="Minh hoạ menu chính">
+          <div class="center">
+            <div class="title">Hứng Quà FPT</div>
+            <div>Kỷ lục: <span class="mono">1.250</span></div>
+            <span class="btn primary">Chơi</span>
+            <span class="btn">Cách chơi</span>
+            <span class="btn">Điểm cao</span>
+            <span class="btn">Cài đặt</span>
+          </div>
+        </div>
+        <h3>MH-02 · Menu chính</h3>
+        <ul>
+          <li>Hiện kỷ lục cá nhân nếu đã có.</li>
+          <li>Nút <strong>Chơi</strong> to nhất, nằm trong vùng ngón cái dễ chạm.</li>
+          <li>Có nền động nhẹ: vài sản phẩm rơi chậm phía sau.</li>
+        </ul>
+      </section>
+
+      <section class="screen-spec">
+        <div class="phone" aria-label="Minh hoạ hướng dẫn">
+          <div class="center">
+            <div class="title">Cách chơi</div>
+            <div>Kéo giỏ sang trái/phải</div>
+            <div><span class="mono">■</span> Hứng sản phẩm FPT: +điểm</div>
+            <div><span class="mono">●</span> Né vật xấu: −1 mạng</div>
+            <div>Để lọt sản phẩm: −1 mạng</div>
+            <span class="btn primary">Bắt đầu</span>
+          </div>
+        </div>
+        <h3>MH-03 · Hướng dẫn</h3>
+        <ul>
+          <li>Tối đa 4 dòng chữ, mỗi loại vật có hình minh hoạ.</li>
+          <li>Điều khiển hiển thị theo thiết bị: PC thấy phím, điện thoại thấy hình ngón tay.</li>
+          <li>Tự hiện ở lần đầu; sau đó mở lại được từ menu.</li>
+        </ul>
+      </section>
+
+      <section class="screen-spec">
+        <div class="phone" aria-label="Minh hoạ màn hình chơi">
+          <div class="bar"><span>♥♥♡</span><span>1.240</span><span>⏸</span></div>
+          <div style="position:absolute;top:34px;left:0;right:0;text-align:center;font-family:var(--font-mono)">Cấp 3 · Combo x1,5</div>
+          <div class="item" style="top:22%;left:18%">PB</div>
+          <div class="item bad" style="top:36%;left:62%">✕</div>
+          <div class="item gold" style="top:50%;left:30%">★</div>
+          <div class="item" style="top:66%;left:70%">CAM</div>
+          <div class="basket"></div>
+        </div>
+        <h3>MH-04 · Chơi</h3>
+        <ul>
+          <li>Thanh trên cùng: mạng (trái), điểm (giữa), nút tạm dừng (phải).</li>
+          <li>Dòng phụ: cấp độ, hệ số combo, hỗ trợ đang có kèm thời gian còn lại.</li>
+          <li>Hứng vật: chữ "+10" bay lên tại chỗ. Mất mạng: màn hình nháy đỏ, giỏ rung.</li>
+          <li>Lên cấp: dòng chữ "Cấp 4!" hiện 1 giây giữa màn hình.</li>
+          <li>Đầu mỗi ván đếm ngược 3–2–1.</li>
+        </ul>
+      </section>
+
+      <section class="screen-spec">
+        <div class="phone" aria-label="Minh hoạ tạm dừng">
+          <div class="bar"><span>♥♥♡</span><span>1.240</span><span>⏸</span></div>
+          <div class="dim"></div>
+          <div class="sheet">
+            <div class="title">Tạm dừng</div>
+            <span class="btn primary">Tiếp tục</span>
+            <span class="btn">Chơi lại</span>
+            <span class="btn">Âm thanh: Bật</span>
+            <span class="btn">Về menu</span>
+          </div>
+        </div>
+        <h3>MH-05 · Tạm dừng</h3>
+        <ul>
+          <li>Lớp phủ tối trên khung chơi; mọi vật đứng yên.</li>
+          <li>Tiếp tục thì đếm ngược 3 giây trước khi vật rơi lại.</li>
+          <li>Bật/tắt nhanh âm thanh ngay tại đây.</li>
+        </ul>
+      </section>
+
+      <section class="screen-spec">
+        <div class="phone" aria-label="Minh hoạ kết thúc ván">
+          <div class="center">
+            <div class="title">Hết mạng!</div>
+            <div style="color:var(--color-accent);font-weight:700">Kỷ lục mới!</div>
+            <div class="mono" style="font-size:var(--text-2xl)">1.380</div>
+            <div class="row"><span>Thời gian</span><span class="mono">02:14</span></div>
+            <div class="row"><span>Combo cao nhất</span><span class="mono">18</span></div>
+            <div class="row"><span>Đã hứng</span><span class="mono">74</span></div>
+            <span class="btn primary">Chơi lại</span>
+            <span class="btn">Về menu</span>
+          </div>
+        </div>
+        <h3>MH-06 · Kết thúc</h3>
+        <ul>
+          <li>Hiện điểm, thời gian, combo cao nhất, số vật đã hứng.</li>
+          <li>Đạt kỷ lục: hiện nhãn "Kỷ lục mới!" và hiệu ứng pháo giấy.</li>
+          <li>Trong 0,8 giây đầu chưa bấm được nút để tránh chạm nhầm khi đang kéo giỏ.</li>
+          <li>Nút <strong>Chia sẻ</strong> (nếu làm CN-15).</li>
+        </ul>
+      </section>
+
+      <section class="screen-spec">
+        <div class="phone" aria-label="Minh hoạ điểm cao">
+          <div class="center">
+            <div class="title">Điểm cao</div>
+            <div class="row"><span>1. 1.380</span><span>06/11</span></div>
+            <div class="row"><span>2. 1.250</span><span>05/11</span></div>
+            <div class="row"><span>3. 980</span><span>05/11</span></div>
+            <div class="row"><span>4. 720</span><span>04/11</span></div>
+            <div class="row"><span>5. 410</span><span>04/11</span></div>
+            <span class="btn">Quay lại</span>
+          </div>
+        </div>
+        <h3>MH-07 · Điểm cao</h3>
+        <ul>
+          <li>5 điểm cao nhất trên máy này, kèm ngày chơi.</li>
+          <li>Chưa có điểm: hiện "Chưa có điểm nào. Chơi ván đầu tiên nhé!" và nút <strong>Chơi</strong>.</li>
+        </ul>
+      </section>
+
+      <section class="screen-spec">
+        <div class="phone" aria-label="Minh hoạ cài đặt">
+          <div class="center">
+            <div class="title">Cài đặt</div>
+            <div class="row"><span>Âm hiệu ứng</span><span>Bật</span></div>
+            <div class="row"><span>Nhạc nền</span><span>Tắt</span></div>
+            <div class="row"><span>Rung</span><span>Bật</span></div>
+            <div class="row"><span>Xem lại hướng dẫn</span><span>›</span></div>
+            <span class="btn">Xoá dữ liệu</span>
+            <span class="btn">Quay lại</span>
+          </div>
+        </div>
+        <h3>MH-08 · Cài đặt</h3>
+        <ul>
+          <li>Bật/tắt âm hiệu ứng, nhạc nền, rung. Thay đổi lưu ngay.</li>
+          <li><strong>Xoá dữ liệu</strong> phải xác nhận 2 bước; xoá điểm cao, thống kê và đặt lại cài đặt.</li>
+        </ul>
+      </section>
+
+    </div>
+
+    <h2>Nguyên tắc giao diện chung</h2>
+    <ul>
+      <li>Màu sắc, chữ, khoảng cách lấy từ <code>design/tokens.css</code>; màu thương hiệu FPT chỉ thay vào khi đã được duyệt.</li>
+      <li>Vùng chạm tối thiểu 44 × 44 px; nút chính nằm ở nửa dưới màn hình điện thoại.</li>
+      <li>Tránh tai thỏ và thanh điều hướng của điện thoại (vùng an toàn).</li>
+      <li>Xoay ngang trên điện thoại: khung chơi vẫn giữ tỉ lệ dọc, hai bên để nền trang trí.</li>
+    </ul>
+
+    <nav class="footer-nav">
+      <a href="02-chuc-nang.html">← 02 · Chức năng</a>
+      <a href="04-quy-tac-du-lieu.html">04 · Quy tắc &amp; dữ liệu →</a>
+    </nav>
+  </main>
+</div>
+</body>
+</html>
